@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #120b18, #35152c, #180d20);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 45px 22px;
+}
+
+.heart {
+  font-size: 65px;
+  animation: beat 1.2s infinite;
+}
+
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+h1 {
+  font-size: 42px;
+  margin: 15px 0 10px;
+}
+
+.subtitle {
+  font-size: 18px;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.card {
+  margin-top: 30px;
+  padding: 25px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 25px 0;
+}
+
+.time {
+  background: rgba(255,255,255,0.1);
+  padding: 13px 10px;
+  border-radius: 15px;
+  min-width: 65px;
+}
+
+.time b {
+  display: block;
+  font-size: 25px;
+}
+
+.time span {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.message {
+  font-size: 17px;
+  line-height: 1.8;
+  text-align: left;
+}
+
+button {
+  margin-top: 25px;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-size: 16px;
+  background: white;
+  color: #35152c;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#surprise {
+  display: none;
+  margin-top: 25px;
+  font-size: 18px;
+  line-height: 1.7;
+  animation: appear 1s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.floating {
+  position: fixed;
+  bottom: -30px;
+  font-size: 22px;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% { opacity: 0.8; }
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="heart">❤️</div>
+
+  <h1>Happy Birthday</h1>
+
+  <p class="subtitle">
+    A little surprise made just for you.
+  </p>
+
+  <div class="card">
+
+    <h2>🎂 November 1 🎂</h2>
+
+    <div class="countdown">
+      <div class="time">
+        <b id="days">0</b>
+        <span>DAYS</span>
+      </div>
+
+      <div class="time">
+        <b id="hours">0</b>
+        <span>HOURS</span>
+      </div>
+
+      <div class="time">
+        <b id="minutes">0</b>
+        <span>MINUTES</span>
+      </div>
+
+      <div class="time">
+        <b id="seconds">0</b>
+        <span>SECONDS</span>
+      </div>
+    </div>
+
+    <div class="message">
+      <p>
+        Even though we're far from each other, I wanted to make
+        something that could travel the distance for me. ❤️
+      </p>
+
+      <p>
+        I hope your birthday is filled with happiness, laughter,
+        and all the little things that make you smile.
+      </p>
+
+      <p>
+        Distance may keep us apart sometimes, but it doesn't make
+        the people we care about any less important.
+      </p>
+    </div>
+
+    <button onclick="showSurprise()">
+      🎁 Open Your Surprise
+    </button>
+
+    <div id="surprise">
+      <h2>💌 One More Thing...</h2>
+
+      <p>
+        Happy Birthday once again! ❤️
+      </p>
+
+      <p>
+        I hope this little website makes you smile,
+        because that was the whole point of making it.
+      </p>
+
+      <p>
+        Keep smiling, keep being you, and enjoy your special day. 🎂✨
+      </p>
+
+      <p>— Made specially for you ❤️</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+function updateCountdown() {
+
+  const now = new Date();
+
+  let year = now.getFullYear();
+
+  let birthday = new Date(year, 10, 1, 0, 0, 0);
+
+  if (now > birthday) {
+    birthday = new Date(year + 1, 10, 1, 0, 0, 0);
+  }
+
+  const difference = birthday - now;
+
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((difference / (1000 * 60)) % 60);
+  const seconds = Math.floor((difference / 1000) % 60);
+
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = hours;
+  document.getElementById("minutes").textContent = minutes;
+  document.getElementById("seconds").textContent = seconds;
+}
+
+function showSurprise() {
+  document.getElementById("surprise").style.display = "block";
+
+  for (let i = 0; i < 15; i++) {
+    createHeart();
+  }
+}
+
+function createHeart() {
+
+  const heart = document.createElement("div");
+
+  heart.className = "floating";
+  heart.innerHTML = "❤️";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 7000);
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+</script>
+
+</body>
+</html>
