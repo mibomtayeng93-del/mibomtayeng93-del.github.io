@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>For Gracy ❤️</title>
 
 <style>
@@ -22,25 +21,23 @@ body{
     radial-gradient(circle at 80% 90%,#4b1d68 0%,transparent 35%),
     linear-gradient(135deg,#090713,#170d25,#090713);
   overflow-x:hidden;
-}
-
-.container{
-  width:92%;
-  max-width:650px;
-  margin:auto;
-  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
+  padding:20px;
+}
+
+.container{
+  width:100%;
+  max-width:480px;
   text-align:center;
-  padding:35px 0;
   position:relative;
   z-index:2;
 }
 
 .card{
   width:100%;
-  padding:32px 22px;
+  padding:30px 20px;
   border-radius:30px;
   background:rgba(255,255,255,.075);
   border:1px solid rgba(255,255,255,.14);
@@ -56,8 +53,8 @@ body{
 }
 
 h1{
-  font-size:clamp(48px,14vw,82px);
-  margin:12px 0 4px;
+  font-size:clamp(38px,10vw,64px);
+  margin:10px 0 4px;
   background:linear-gradient(90deg,#fff,#ffb4df,#d9b8ff);
   -webkit-background-clip:text;
   background-clip:text;
@@ -65,54 +62,53 @@ h1{
 }
 
 .subtitle{
-  font-size:15px;
-  line-height:1.6;
+  font-size:14px;
+  line-height:1.5;
   opacity:.78;
-  max-width:450px;
-  margin:0 auto 25px;
+  margin-bottom:20px;
 }
 
 .date{
-  font-size:21px;
+  font-size:16px;
   font-weight:bold;
-  margin-bottom:22px;
+  margin-bottom:18px;
+  color:#ffb4df;
 }
 
 .countdown{
   display:flex;
   justify-content:center;
-  gap:9px;
-  flex-wrap:wrap;
-  margin-bottom:22px;
+  gap:8px;
+  margin-bottom:20px;
 }
 
 .time-box{
-  width:75px;
-  padding:13px 4px;
-  border-radius:18px;
+  width:70px;
+  padding:10px 4px;
+  border-radius:15px;
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.12);
 }
 
 .number{
-  font-size:27px;
+  font-size:22px;
   font-weight:bold;
 }
 
 .label{
-  margin-top:4px;
-  font-size:9px;
+  margin-top:2px;
+  font-size:8px;
   letter-spacing:1px;
   opacity:.55;
 }
 
 .locked{
-  padding:18px;
-  border-radius:20px;
+  padding:15px;
+  border-radius:15px;
   background:rgba(0,0,0,.18);
   border:1px solid rgba(255,255,255,.1);
-  line-height:1.6;
-  font-size:14px;
+  font-size:13px;
+  opacity:.8;
 }
 
 .open-area{
@@ -122,33 +118,33 @@ h1{
 .open-button{
   border:0;
   color:white;
-  font-size:16px;
+  font-size:15px;
   font-weight:bold;
-  padding:16px 28px;
+  padding:14px 26px;
   border-radius:50px;
   background:linear-gradient(90deg,#ff4d9d,#9b5cff);
   box-shadow:0 10px 30px rgba(255,77,157,.3);
   cursor:pointer;
-}
-
-.open-button:active{
-  transform:scale(.96);
+  width:100%;
 }
 
 .message{
   display:none;
-  margin-top:25px;
+  margin-top:20px;
   text-align:left;
-  padding:25px 21px;
-  border-radius:25px;
+  padding:20px;
+  border-radius:20px;
   background:rgba(255,255,255,.07);
   border:1px solid rgba(255,255,255,.13);
-  line-height:1.8;
+  line-height:1.7;
+  font-size:14px;
 }
 
 .message h2{
   text-align:center;
-  margin-bottom: 15px;
+  margin-bottom:12px;
+  font-size:20px;
+  color:#ffb4df;
 }
 </style>
 </head>
@@ -156,12 +152,70 @@ h1{
 
   <div class="container">
     <div class="card">
-      <div class="top">Special Day</div>
-      <h1>Happy Birthday</h1>
-      <p class="subtitle">Wishing you the absolute best day ever, Gracy!</p>
-      <div class="date">❤️</div>
+      <div class="top">🎂 Birthday Countdown</div>
+      <h1>For Gracy</h1>
+      <p class="subtitle">Something special is coming your way...</p>
+      
+      <div class="date">Nov 1, 12:00 AM</div>
+
+      <!-- Countdown Timer -->
+      <div class="countdown" id="countdown">
+        <div class="time-box"><div class="number" id="days">00</div><div class="label">DAYS</div></div>
+        <div class="time-box"><div class="number" id="hours">00</div><div class="label">HOURS</div></div>
+        <div class="time-box"><div class="number" id="minutes">00</div><div class="label">MINS</div></div>
+        <div class="time-box"><div class="number" id="seconds">00</div><div class="label">SECS</div></div>
+      </div>
+
+      <!-- Locked State Message -->
+      <div class="locked" id="lockedBox">
+        🔒 This surprise is locked until November 1st! Come back then to open it. ❤️
+      </div>
+
+      <!-- Unlocked Reveal Button Area -->
+      <div class="open-area" id="openArea">
+        <button class="open-button" onclick="revealSurprise()">🎁 Tap to Open Surprise ❤️</button>
+      </div>
+
+      <!-- Final Secret Message -->
+      <div class="message" id="secretMessage">
+        <h2>Happy Birthday, Gracy! 🎉</h2>
+        <p>You mean so much, and this day is all about celebrating you. Wishing you endless happiness, smiles, and the absolute best year ahead! 💖✨</p>
+      </div>
+
     </div>
   </div>
+
+<script>
+  // Set the target date: November 1, 2026, 00:00:00
+  const targetDate = new Date("Nov 1, 2026 00:00:00").getTime();
+
+  const timer = setInterval(function() {
+    const now = new Date().getTime();
+    const timeLeft = targetDate - now;
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      document.getElementById("countdown").style.display = "none";
+      document.getElementById("lockedBox").style.display = "none";
+      document.getElementById("openArea").style.display = "block";
+    } else {
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = String(days).padStart(2, '0');
+      document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+      document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+    }
+  }, 1000);
+
+  function revealSurprise() {
+    document.getElementById("openArea").style.display = "none";
+    document.getElementById("secretMessage").style.display = "block";
+  }
+</script>
 
 </body>
 </html>
